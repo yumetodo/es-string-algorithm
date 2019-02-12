@@ -1,5 +1,7 @@
 # es-string-algorithm
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/yumetodo/es-string-algorithm.svg)](https://greenkeeper.io/)
+
 ## Introduction
 
 C++ STL provide `find_first_of` / `find_first_not_of` / `find_last_of` / `find_last_not_of` member function.
