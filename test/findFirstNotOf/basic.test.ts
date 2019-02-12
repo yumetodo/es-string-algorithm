@@ -1,4 +1,4 @@
-import { findFirstNotOf } from '../src';
+import { findFirstNotOf } from '../../src';
 describe('findFirstNotOf', () => {
   it('by string', () => {
     const s = 'Hello, world. Welcome to C++ world.';
