@@ -1,6 +1,9 @@
 language: node_js
 node_js:
 - lts/*
+script:
+  - npm run lint
+  - npm test
 deploy:
   provider: npm
   email: yume-wikijp@live.jp
