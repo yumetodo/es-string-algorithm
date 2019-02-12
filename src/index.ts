@@ -16,8 +16,10 @@ const findFirst = (target: string | string[], pos: number, pred: Pred): number =
 
 // size_type find_first_of(std::basic_string_view<charT, traits> sv,
 //                         size_type pos = 0) const noexcept;                          // (5) C++17
-export const findFirstOf = (target: string, key: string, pos = 0): number =>
-  findFirst(target, pos, c => key.includes(c));
+export const findFirstOf = (target: string, key: string, pos = 0, n?: number): number => {
+  if (typeof n !== 'undefined') key = key.substring(0, n);
+  return findFirst(target, pos, c => key.includes(c));
+};
 const findLast = (target: string, pos: number, pred: Pred): number => {
   const targetArr = Array.from(target);
   // if (targetArr.length <= pos) return -1;
