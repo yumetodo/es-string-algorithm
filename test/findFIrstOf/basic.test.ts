@@ -1,4 +1,4 @@
-import { findFirstOf, findLastof, findFirstNotOf, findLastNotof } from '../src';
+import { findFirstOf } from '../../src';
 
 describe('findFirstOf', () => {
   it('by string', () => {
