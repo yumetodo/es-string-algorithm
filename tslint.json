@@ -1,7 +1,11 @@
 {
   "rulesDirectory": [ "tslint-plugin-prettier" ],
+  "linterOptions": {
+    "exclude": [
+        "node_modules/**"
+    ]
+  },
   "rules": {
-    "no-unused-variable": true,
     "prettier": [
       true, {
         "semi": true,

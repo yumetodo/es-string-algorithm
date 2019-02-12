@@ -6,7 +6,9 @@
   "scripts": {
     "prepare": "tsc",
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "lint": "tslint --project .",
+    "lint:fix": "tslint --fix --project ."
   },
   "repository": {
     "type": "git",
