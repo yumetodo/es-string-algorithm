@@ -35,3 +35,14 @@ export const findLastof = (target: string, key: string, pos = -1): number => {
   const re = findFirst(targetArr, key, pos, (c, key) => key.includes(c));
   return -1 === re ? -1 : targetArr.length - 1 - re;
 };
+// size_type find_first_not_of(const basic_string& str, size_type pos = 0) const noexcept; // (1) C++11
+
+// size_type find_first_not_of(const charT* s, size_type pos, size_type n) const;          // (2)
+// size_type find_first_not_of(const charT* s, size_type pos = 0) const;                   // (3)
+
+// size_type find_first_not_of(charT c, size_type pos = 0) const;                          // (4) C++11
+
+// size_type find_first_not_of(std::basic_string_view<charT, traits> sv,
+//                             size_type pos = 0) const noexcept;                          // (5) C++17
+export const findFirstNotOf = (target: string, key: string, pos = 0): number =>
+  findFirst(target, key, pos, (c, key) => !key.includes(c));
