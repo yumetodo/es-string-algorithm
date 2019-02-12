@@ -1,8 +1,9 @@
-type Pred = (c: string) => boolean;
-const findFirst = (target: string | string[], pos: number, pred: Pred): number => {
+type Pred = (c: string, k: string) => boolean;
+const findFirst = (target: string | string[], key: string, pos: number, pred: Pred, n?: number): number => {
+  const k = typeof n !== 'undefined' ? key.substring(0, n) : key;
   let i = 0;
   for (const t of target) {
-    if (pos <= i && pred(t)) return i;
+    if (pos <= i && pred(t, k)) return i;
     ++i;
   }
   return -1;
@@ -16,16 +17,14 @@ const findFirst = (target: string | string[], pos: number, pred: Pred): number =
 
 // size_type find_first_of(std::basic_string_view<charT, traits> sv,
 //                         size_type pos = 0) const noexcept;                          // (5) C++17
-export const findFirstOf = (target: string, key: string, pos = 0, n?: number): number => {
-  if (typeof n !== 'undefined') key = key.substring(0, n);
-  return findFirst(target, pos, c => key.includes(c));
-};
-const findLast = (target: string, pos: number, pred: Pred): number => {
+export const findFirstOf = (target: string, key: string, pos = 0, n?: number): number =>
+  findFirst(target, key, pos, (c, k) => k.includes(c), n);
+const findLast = (target: string, key: string, pos: number, pred: Pred, n?: number): number => {
   const targetArr = Array.from(target);
   // if (targetArr.length <= pos) return -1;
   targetArr.reverse();
   pos = -1 === pos || targetArr.length <= pos ? 0 : targetArr.length - 1 - pos;
-  const re = findFirst(targetArr, pos, pred);
+  const re = findFirst(targetArr, key, pos, pred, n);
   return -1 === re ? -1 : targetArr.length - 1 - re;
 };
 // size_type find_last_of(const basic_string& str, size_type pos = npos) const noexcept; // (1) C++11
@@ -37,8 +36,8 @@ const findLast = (target: string, pos: number, pred: Pred): number => {
 
 // size_type find_last_of(std::basic_string_view<charT, traits> sv,
 //                        size_type pos = npos) const noexcept;                          // (5) C++17
-export const findLastof = (target: string, key: string, pos = -1): number =>
-  findLast(target, pos, c => key.includes(c));
+export const findLastof = (target: string, key: string, pos = -1, n?: number): number =>
+  findLast(target, key, pos, (c, k) => k.includes(c), n);
 // size_type find_first_not_of(const basic_string& str, size_type pos = 0) const noexcept; // (1) C++11
 
 // size_type find_first_not_of(const charT* s, size_type pos, size_type n) const;          // (2)
@@ -48,8 +47,8 @@ export const findLastof = (target: string, key: string, pos = -1): number =>
 
 // size_type find_first_not_of(std::basic_string_view<charT, traits> sv,
 //                             size_type pos = 0) const noexcept;                          // (5) C++17
-export const findFirstNotOf = (target: string, key: string, pos = 0): number =>
-  findFirst(target, pos, c => !key.includes(c));
+export const findFirstNotOf = (target: string, key: string, pos = 0, n?: number): number =>
+  findFirst(target, key, pos, (c, k) => !k.includes(c), n);
 // size_type find_last_not_of(const basic_string& str, size_type pos = npos) const noexcept; // (1) C++11
 
 // size_type find_last_not_of(const charT* s, size_type pos, size_type n) const;             // (2)
@@ -59,5 +58,5 @@ export const findFirstNotOf = (target: string, key: string, pos = 0): number =>
 
 // size_type find_last_not_of(std::basic_string_view<charT, traits> sv,
 //                            size_type pos = npos) const noexcept;                          // (5) C++17
-export const findLastNotof = (target: string, key: string, pos = -1): number =>
-  findLast(target, pos, c => !key.includes(c));
+export const findLastNotof = (target: string, key: string, pos = -1, n?: number): number =>
+  findLast(target, key, pos, (c, k) => !k.includes(c), n);
