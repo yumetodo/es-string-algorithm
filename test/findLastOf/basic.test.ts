@@ -1,4 +1,4 @@
-import { findLastof } from '../src';
+import { findLastof } from '../../src';
 describe('findLastOf', () => {
   it('by string', () => {
     const s = 'Hello, world. Welcome to C++ world.';
