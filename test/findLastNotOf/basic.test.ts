@@ -1,4 +1,4 @@
-import { findLastNotof } from '../src';
+import { findLastNotof } from '../../src';
 describe('findLastNotOf', () => {
   it('by string', () => {
     const s = 'Hello, world. Welcome to C++ world.';
