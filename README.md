@@ -1,5 +1,7 @@
 # es-string-algorithm
 
+[![Build Status](https://travis-ci.org/yumetodo/es-string-algorithm.svg?branch=master)](https://travis-ci.org/yumetodo/es-string-algorithm)
+
 [![Greenkeeper badge](https://badges.greenkeeper.io/yumetodo/es-string-algorithm.svg)](https://greenkeeper.io/)
 
 ## Introduction
