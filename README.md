@@ -30,7 +30,7 @@ export declare const findFirstOf: (target: string, key: string, pos?: number, n?
 Determines the lowest position `xpos`, if possible, such that both of the following conditions hold:
 
 1. `pos <= xpos` and `xpos < size(target)`
-2. [`k.includes(at(target, xpos))`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) (When `n` is `undefined` (omitted), `k` is equal to `key`. Otherwise, `k` is equal to [`key.substring(0, n)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring))
+2. [`k.includes(at(target, xpos))`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) (When `n` is `undefined` (omitted), `k` is equal to `key`. Otherwise, `k` is equal to `std.substr(key, 0, n)`)
 
 #### Parameters
 
@@ -64,7 +64,7 @@ export declare const findLastof: (target: string, key: string, pos?: number, n?:
 Determines the highest position `xpos`, if possible, such that both of the following conditions hold:
 
 1. `pos <= xpos` and `xpos < size(target)`
-2. [`k.includes(at(target, xpos))`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) (When `n` is `undefined` (omitted), `k` is equal to `key`. Otherwise, `k` is equal to [`key.substring(0, n)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring))
+2. [`k.includes(at(target, xpos))`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) (When `n` is `undefined` (omitted), `k` is equal to `key`. Otherwise, `k` is equal to `std.substr(key, 0, n)`)
 
 #### Parameters
 
@@ -98,7 +98,7 @@ export declare const findFirstNotOf: (target: string, key: string, pos?: number,
 Determines the lowest position `xpos`, if possible, such that both of the following conditions hold:
 
 1. `pos <= xpos` and `xpos < size(target)`
-2. [`!k.includes(at(target, xpos))`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) (When `n` is `undefined` (omitted), `k` is equal to `key`. Otherwise, `k` is equal to [`key.substring(0, n)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring))
+2. [`!k.includes(at(target, xpos))`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) (When `n` is `undefined` (omitted), `k` is equal to `key`. Otherwise, `k` is equal to `std.substr(key, 0, n)`)
 
 #### Parameters
 
@@ -132,7 +132,7 @@ export declare const findLastNotof: (target: string, key: string, pos?: number, 
 Determines the highest position `xpos`, if possible, such that both of the following conditions hold:
 
 1. `pos <= xpos` and `xpos < size(target)`
-2. [`k.includes(at(target, xpos))`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) (When `n` is `undefined` (omitted), `k` is equal to `key`. Otherwise, `k` is equal to [`key.substring(0, n)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring))
+2. [`k.includes(at(target, xpos))`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) (When `n` is `undefined` (omitted), `k` is equal to `key`. Otherwise, `k` is equal to `std.substr(key, 0, n)`)
 
 #### Parameters
 
