@@ -81,3 +81,32 @@ export const findFirstNotOf = (target: string, key: string, pos = 0, n?: number)
  */
 export const findLastNotof = (target: string, key: string, pos = -1, n?: number): number =>
   findLast(target, pos, t => !includes(key, t, n));
+
+/**
+ * Create part of the `s`
+ * @param s string
+ * @param pos copy start position
+ * @param n copy length
+ * @returns part of the `s` in range of `[pos...rlast]` (`rlast` is the smaller of `pos + n` and `size(s)`)
+ * @throws {RangeError} When `pos` or `n` is negative or `pos` > `std.size(s)`
+ */
+export const substr = (s: string, pos = 0, n?: number): string => {
+  if (pos < 0) throw new RangeError('pos < 0');
+  if (typeof n === 'number' && n < 0) throw new RangeError('n < 0');
+  let i = 0;
+  let l = 0;
+  let begin = 0;
+  for (const c of s) {
+    if (i === pos) {
+      if (typeof n === 'number' && 0 === n) return '';
+      begin = l;
+    } else if (typeof n === 'number' && i === pos + n) {
+      return s.substring(begin, l);
+    }
+    l += c.length;
+    ++i;
+  }
+  if (i < pos) throw new RangeError(`std.substr: pos (which is ${pos}) > std.size(s) (which is ${i})`);
+  if (0 === n) return '';
+  return s.substring(begin);
+};

@@ -156,3 +156,25 @@ console.log(std.findLastNotof(s, 'Welcome to C++ world.', 1));// => 5
 console.log(std.findLastNotof('arikitari na sekai', 'a', 0));// => -1
 console.log(std.findLastNotof('🍣🍺', '🍺'));// => 0
 ```
+
+### substr
+
+```ts
+export declare const substr: (s: string, pos?: number, n?: number | undefined) => string;
+```
+
+Create part of the `s`
+
+#### Parameters
+
+- `s`: string
+- `pos = 0`: copy start position
+- `n`(opt): copy length
+
+#### Return value
+
+part of the `s` in range of `[pos...rlast]` (`rlast` is the smaller of `pos + n` and `size(s)`)
+
+#### Exception
+
+Throws `RangeError` when `pos` or `n` is negative or `pos` > `std.size(s)`
