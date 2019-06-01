@@ -20,7 +20,7 @@ const findFirst = (target: string | string[], pos: number, pred: Pred): number =
 /**
  * Determines the lowest position `xpos`, if possible, such that both of the following conditions hold:
  *
- * 1. `pos <= xpos` and `xpos < size(target)`
+ * 1. `pos <= xpos` and `xpos < std.size(target)`
  * 2. [`k.includes(at(target, xpos))`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) (When `n` is `undefined` (omitted), `k` is equal to `key`. Otherwise, `k` is equal to `std.substr(key, 0, n)`)
  *
  * @param target search target string
@@ -42,7 +42,7 @@ const findLast = (target: string, pos: number, pred: Pred): number => {
 /**
  * Determines the highest position `xpos`, if possible, such that both of the following conditions hold:
  *
- * 1. `pos <= xpos` and `xpos < size(target)`
+ * 1. `pos <= xpos` and `xpos < std.size(target)`
  * 2. [`k.includes(at(target, xpos))`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) (When `n` is `undefined` (omitted), `k` is equal to `key`. Otherwise, `k` is equal to `std.substr(key, 0, n)`)
  *
  * @param target search target string
@@ -56,7 +56,7 @@ export const findLastof = (target: string, key: string, pos = -1, n?: number): n
 /**
  * Determines the lowest position `xpos`, if possible, such that both of the following conditions hold:
  *
- * 1. `pos <= xpos` and `xpos < size(target)`
+ * 1. `pos <= xpos` and `xpos < std.size(target)`
  * 2. [`!k.includes(at(target, xpos))`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) (When `n` is `undefined` (omitted), `k` is equal to `key`. Otherwise, `k` is equal to `std.substr(key, 0, n)`)
  *
  * @param target search target string
@@ -70,7 +70,7 @@ export const findFirstNotOf = (target: string, key: string, pos = 0, n?: number)
 /**
  * Determines the highest position `xpos`, if possible, such that both of the following conditions hold:
  *
- * 1. `pos <= xpos` and `xpos < size(target)`
+ * 1. `pos <= xpos` and `xpos < std.size(target)`
  * 2. [`k.includes(at(target, xpos))`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) (When `n` is `undefined` (omitted), `k` is equal to `key`. Otherwise, `k` is equal to `std.substr(key, 0, n)`)
  *
  * @param target search target string
@@ -87,7 +87,7 @@ export const findLastNotof = (target: string, key: string, pos = -1, n?: number)
  * @param s string
  * @param pos copy start position
  * @param n copy length
- * @returns part of the `s` in range of `[pos...rlast]` (`rlast` is the smaller of `pos + n` and `size(s)`)
+ * @returns part of the `s` in range of `[pos...rlast]` (`rlast` is the smaller of `pos + n` and `std.size(s)`)
  * @throws {RangeError} When `pos` or `n` is negative or `pos` > `std.size(s)`
  */
 export const substr = (s: string, pos = 0, n?: number): string => {
@@ -109,4 +109,16 @@ export const substr = (s: string, pos = 0, n?: number): string => {
   if (i < pos) throw new RangeError(`std.substr: pos (which is ${pos}) > std.size(s) (which is ${i})`);
   if (0 === n) return '';
   return s.substring(begin);
+};
+
+/**
+ * A count of the number of codepoint currently in the string.
+ *
+ * Complexity: O(n)
+ * @param s string
+ */
+export const size = (s: string): number => {
+  let i = 0;
+  for (const _ of s) ++i;
+  return i;
 };
