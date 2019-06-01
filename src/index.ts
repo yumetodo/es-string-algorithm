@@ -1,23 +1,23 @@
 type Pred = (t: string) => boolean;
 namespace impl {
   export const includes = (target: string | string[], searchString: string, n?: number): boolean => {
-  if (typeof n !== 'number') return target.includes(searchString);
-  let i = 0;
-  for (const t of target) {
-    if (n <= i) break;
-    if (t === searchString) return true;
-    ++i;
-  }
-  return false;
-};
+    if (typeof n !== 'number') return target.includes(searchString);
+    let i = 0;
+    for (const t of target) {
+      if (n <= i) break;
+      if (t === searchString) return true;
+      ++i;
+    }
+    return false;
+  };
   export const findFirst = (target: string | string[], pos: number, pred: Pred): number => {
-  let i = 0;
-  for (const t of target) {
-    if (pos <= i && pred(t)) return i;
-    ++i;
-  }
-  return -1;
-};
+    let i = 0;
+    for (const t of target) {
+      if (pos <= i && pred(t)) return i;
+      ++i;
+    }
+    return -1;
+  };
 }
 /**
  * Determines the lowest position `xpos`, if possible, such that both of the following conditions hold:
@@ -35,13 +35,13 @@ export const findFirstOf = (target: string, key: string, pos = 0, n?: number): n
   impl.findFirst(target, pos, t => impl.includes(key, t, n));
 namespace impl {
   export const findLast = (target: string, pos: number, pred: Pred): number => {
-  const targetArr = Array.from(target);
-  // if (targetArr.length <= pos) return -1;
-  targetArr.reverse();
-  pos = -1 === pos || targetArr.length <= pos ? 0 : targetArr.length - 1 - pos;
-  const re = findFirst(targetArr, pos, pred);
-  return -1 === re ? -1 : targetArr.length - 1 - re;
-};
+    const targetArr = Array.from(target);
+    // if (targetArr.length <= pos) return -1;
+    targetArr.reverse();
+    pos = -1 === pos || targetArr.length <= pos ? 0 : targetArr.length - 1 - pos;
+    const re = findFirst(targetArr, pos, pred);
+    return -1 === re ? -1 : targetArr.length - 1 - re;
+  };
 }
 /**
  * Determines the highest position `xpos`, if possible, such that both of the following conditions hold:
@@ -86,6 +86,60 @@ export const findFirstNotOf = (target: string, key: string, pos = 0, n?: number)
 export const findLastNotof = (target: string, key: string, pos = -1, n?: number): number =>
   impl.findLast(target, pos, t => !impl.includes(key, t, n));
 
+export const find = (target: string, key: string, pos = 0, n?: number): number => {
+  let targetIt = target[Symbol.iterator]();
+  let targetItR: IteratorResult<string> | undefined;
+  let i = 0;
+  let isSkipped = false;
+  console.log(`before skip:: i: ${i}`);
+  for (; i < pos && !(targetItR = targetIt.next()).done; ++i) isSkipped = true;
+  const formatMessage = () => {
+    let message = `i: ${i}`;
+    if (targetItR) {
+      if (targetItR.done) {
+        message += ', targetItR.done: true ';
+      } else {
+        message += `, targetItR.value: ${targetItR.value}`;
+      }
+    }
+    return message;
+  };
+  console.log('after skip:: ', formatMessage());
+  for (; typeof targetItR === 'undefined' || !targetItR.done; ++i) {
+    // if (i < pos && !(targetItR = targetIt.next()).done) continue;
+    // if (!(targetItR = targetIt.next()).done && i < pos) continue;
+    const keyIt = key[Symbol.iterator]();
+    let keyItR: IteratorResult<string> | undefined;
+    const formatKeyItR = () => {
+      if (keyItR) {
+        if (keyItR.done) {
+          return ', keyItR.done: true ';
+        } else {
+          return `, keyItR.value: ${keyItR.value}`;
+        }
+      }
+      return '';
+    };
+    targetItR = isSkipped ? targetItR || targetIt.next() : targetIt.next();
+    //save
+    const currentTargetIt = targetIt;
+    for (
+      let j = 0;
+      (typeof n === 'undefined' || j < n) &&
+      !(targetItR = isSkipped ? targetItR : targetIt.next()).done &&
+      !(keyItR = keyIt.next()).done &&
+      targetItR.value === keyItR.value;
+      ++j, isSkipped = false
+    ) {
+      console.log(formatMessage(), formatKeyItR(), `j: ${j}`);
+    }
+    isSkipped = false;
+    console.log(formatMessage(), formatKeyItR());
+    if (typeof keyItR !== 'undefined' && keyItR.done) return i;
+    targetIt = currentTargetIt;
+  }
+  return -1;
+};
 /**
  * Create part of the `s`
  * @param s string
