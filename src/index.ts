@@ -91,8 +91,8 @@ export const findLastNotof = (target: string, key: string, pos = -1, n?: number)
  * @throws {RangeError} When `pos` or `n` is negative or `pos` > `std.size(s)`
  */
 export const substr = (s: string, pos = 0, n?: number): string => {
-  if (pos < 0) throw new RangeError('pos < 0');
-  if (typeof n === 'number' && n < 0) throw new RangeError('n < 0');
+  if (pos < 0) throw new RangeError('std.substr: pos < 0');
+  if (typeof n === 'number' && n < 0) throw new RangeError('std.substr: n < 0');
   let i = 0;
   let l = 0;
   let begin = 0;
