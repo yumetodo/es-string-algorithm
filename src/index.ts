@@ -1,5 +1,6 @@
 type Pred = (t: string) => boolean;
-const includes = (target: string | string[], searchString: string, n?: number): boolean => {
+namespace impl {
+  export const includes = (target: string | string[], searchString: string, n?: number): boolean => {
   if (typeof n !== 'number') return target.includes(searchString);
   let i = 0;
   for (const t of target) {
@@ -9,7 +10,7 @@ const includes = (target: string | string[], searchString: string, n?: number): 
   }
   return false;
 };
-const findFirst = (target: string | string[], pos: number, pred: Pred): number => {
+  export const findFirst = (target: string | string[], pos: number, pred: Pred): number => {
   let i = 0;
   for (const t of target) {
     if (pos <= i && pred(t)) return i;
@@ -17,6 +18,7 @@ const findFirst = (target: string | string[], pos: number, pred: Pred): number =
   }
   return -1;
 };
+}
 /**
  * Determines the lowest position `xpos`, if possible, such that both of the following conditions hold:
  *
@@ -30,8 +32,9 @@ const findFirst = (target: string | string[], pos: number, pred: Pred): number =
  * @returns `xpos` if the function can determine such a value for `xpos`. Otherwise, returns `-1`.
  */
 export const findFirstOf = (target: string, key: string, pos = 0, n?: number): number =>
-  findFirst(target, pos, t => includes(key, t, n));
-const findLast = (target: string, pos: number, pred: Pred): number => {
+  impl.findFirst(target, pos, t => impl.includes(key, t, n));
+namespace impl {
+  export const findLast = (target: string, pos: number, pred: Pred): number => {
   const targetArr = Array.from(target);
   // if (targetArr.length <= pos) return -1;
   targetArr.reverse();
@@ -39,6 +42,7 @@ const findLast = (target: string, pos: number, pred: Pred): number => {
   const re = findFirst(targetArr, pos, pred);
   return -1 === re ? -1 : targetArr.length - 1 - re;
 };
+}
 /**
  * Determines the highest position `xpos`, if possible, such that both of the following conditions hold:
  *
@@ -52,7 +56,7 @@ const findLast = (target: string, pos: number, pred: Pred): number => {
  * @retunrs `xpos` if the function can determine such a value for `xpos`. Otherwise, returns `-1`.
  */
 export const findLastof = (target: string, key: string, pos = -1, n?: number): number =>
-  findLast(target, pos, t => includes(key, t, n));
+  impl.findLast(target, pos, t => impl.includes(key, t, n));
 /**
  * Determines the lowest position `xpos`, if possible, such that both of the following conditions hold:
  *
@@ -66,7 +70,7 @@ export const findLastof = (target: string, key: string, pos = -1, n?: number): n
  * @returns `xpos` if the function can determine such a value for `xpos`. Otherwise, returns `-1`.
  */
 export const findFirstNotOf = (target: string, key: string, pos = 0, n?: number): number =>
-  findFirst(target, pos, t => !includes(key, t, n));
+  impl.findFirst(target, pos, t => !impl.includes(key, t, n));
 /**
  * Determines the highest position `xpos`, if possible, such that both of the following conditions hold:
  *
@@ -80,7 +84,7 @@ export const findFirstNotOf = (target: string, key: string, pos = 0, n?: number)
  * @returns `xpos` if the function can determine such a value for `xpos`. Otherwise, returns `-1`.
  */
 export const findLastNotof = (target: string, key: string, pos = -1, n?: number): number =>
-  findLast(target, pos, t => !includes(key, t, n));
+  impl.findLast(target, pos, t => !impl.includes(key, t, n));
 
 /**
  * Create part of the `s`
