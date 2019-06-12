@@ -10,5 +10,6 @@ describe('find', () => {
   });
   it('emoji', () => {
     expect(find('🍣🍺📧💾', '🍺📧')).toEqual(1);
+    expect(find('🍺🍣🍺📧💾', '🍺📧')).toEqual(2);
   });
 });
