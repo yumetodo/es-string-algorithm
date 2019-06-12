@@ -87,58 +87,34 @@ export const findLastNotof = (target: string, key: string, pos = -1, n?: number)
   impl.findLast(target, pos, t => !impl.includes(key, t, n));
 
 export const find = (target: string, key: string, pos = 0, n?: number): number => {
-  let targetIt = target[Symbol.iterator]();
-  let targetItR: IteratorResult<string> | undefined;
-  let i = 0;
-  let isSkipped = false;
-  console.log(`before skip:: i: ${i}`);
-  for (; i < pos && !(targetItR = targetIt.next()).done; ++i) isSkipped = true;
-  const formatMessage = () => {
-    let message = `i: ${i}`;
-    if (targetItR) {
-      if (targetItR.done) {
-        message += ', targetItR.done: true ';
-      } else {
-        message += `, targetItR.value: ${targetItR.value}`;
+  for (; ; ++pos) {
+    let i = 0;
+    let it1 = target[Symbol.iterator]();
+
+    for (; i < pos; ++i) {
+      if (it1.next().done) {
+        return -1;
       }
     }
-    return message;
-  };
-  console.log('after skip:: ', formatMessage());
-  for (; typeof targetItR === 'undefined' || !targetItR.done; ++i) {
-    // if (i < pos && !(targetItR = targetIt.next()).done) continue;
-    // if (!(targetItR = targetIt.next()).done && i < pos) continue;
-    const keyIt = key[Symbol.iterator]();
-    let keyItR: IteratorResult<string> | undefined;
-    const formatKeyItR = () => {
-      if (keyItR) {
-        if (keyItR.done) {
-          return ', keyItR.done: true ';
-        } else {
-          return `, keyItR.value: ${keyItR.value}`;
-        }
+
+    let it2 = key[Symbol.iterator]();
+
+    for (let j = 0; ; ++j) {
+      const n1 = it1.next();
+      const n2 = it2.next();
+
+      if (n2.done || j == n) {
+        return i;
       }
-      return '';
-    };
-    targetItR = isSkipped ? targetItR || targetIt.next() : targetIt.next();
-    //save
-    const currentTargetIt = targetIt;
-    for (
-      let j = 0;
-      (typeof n === 'undefined' || j < n) &&
-      !(targetItR = isSkipped ? targetItR : targetIt.next()).done &&
-      !(keyItR = keyIt.next()).done &&
-      targetItR.value === keyItR.value;
-      ++j, isSkipped = false
-    ) {
-      console.log(formatMessage(), formatKeyItR(), `j: ${j}`);
+      if (n1.done) {
+        return -1;
+      }
+
+      if (n1.value != n2.value) {
+        break;
+      }
     }
-    isSkipped = false;
-    console.log(formatMessage(), formatKeyItR());
-    if (typeof keyItR !== 'undefined' && keyItR.done) return i;
-    targetIt = currentTargetIt;
   }
-  return -1;
 };
 /**
  * Create part of the `s`
