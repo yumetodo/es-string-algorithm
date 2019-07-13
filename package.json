@@ -24,13 +24,13 @@
   },
   "homepage": "https://github.com/yumetodo/es-string-algorithm#readme",
   "devDependencies": {
-    "@types/jest": "^24.0.13",
+    "@types/jest": "^24.0.15",
     "jest": "^24.8.0",
-    "prettier": "^1.17.1",
+    "prettier": "^1.18.2",
     "ts-jest": "^24.0.2",
-    "tslint": "^5.17.0",
+    "tslint": "^5.18.0",
     "tslint-plugin-prettier": "^2.0.1",
-    "typescript": "^3.5.1"
+    "typescript": "^3.5.3"
   },
   "jest": {
     "transform": {
