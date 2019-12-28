@@ -1,24 +1,4 @@
-type Pred = (t: string) => boolean;
-namespace impl {
-  export const includes = (target: string | string[], searchString: string, n?: number): boolean => {
-  if (typeof n !== 'number') return target.includes(searchString);
-  let i = 0;
-  for (const t of target) {
-    if (n <= i) break;
-    if (t === searchString) return true;
-    ++i;
-  }
-  return false;
-};
-  export const findFirst = (target: string | string[], pos: number, pred: Pred): number => {
-  let i = 0;
-  for (const t of target) {
-    if (pos <= i && pred(t)) return i;
-    ++i;
-  }
-  return -1;
-};
-}
+import * as impl from './impl';
 /**
  * Determines the lowest position `xpos`, if possible, such that both of the following conditions hold:
  *
@@ -33,16 +13,6 @@ namespace impl {
  */
 export const findFirstOf = (target: string, key: string, pos = 0, n?: number): number =>
   impl.findFirst(target, pos, t => impl.includes(key, t, n));
-namespace impl {
-  export const findLast = (target: string, pos: number, pred: Pred): number => {
-  const targetArr = Array.from(target);
-  // if (targetArr.length <= pos) return -1;
-  targetArr.reverse();
-  pos = -1 === pos || targetArr.length <= pos ? 0 : targetArr.length - 1 - pos;
-  const re = findFirst(targetArr, pos, pred);
-  return -1 === re ? -1 : targetArr.length - 1 - re;
-};
-}
 /**
  * Determines the highest position `xpos`, if possible, such that both of the following conditions hold:
  *
@@ -95,14 +65,20 @@ export const findLastNotof = (target: string, key: string, pos = -1, n?: number)
  * @throws {RangeError} When `pos` or `n` is negative or `pos` > `std.size(s)`
  */
 export const substr = (s: string, pos = 0, n?: number): string => {
-  if (pos < 0) throw new RangeError('std.substr: pos < 0');
-  if (typeof n === 'number' && n < 0) throw new RangeError('std.substr: n < 0');
+  if (pos < 0) {
+    throw new RangeError('std.substr: pos < 0');
+  }
+  if (typeof n === 'number' && n < 0) {
+    throw new RangeError('std.substr: n < 0');
+  }
   let i = 0;
   let l = 0;
   let begin = 0;
   for (const c of s) {
     if (i === pos) {
-      if (typeof n === 'number' && 0 === n) return '';
+      if (typeof n === 'number' && 0 === n) {
+        return '';
+      }
       begin = l;
     } else if (typeof n === 'number' && i === pos + n) {
       return s.substring(begin, l);
@@ -110,8 +86,12 @@ export const substr = (s: string, pos = 0, n?: number): string => {
     l += c.length;
     ++i;
   }
-  if (i < pos) throw new RangeError(`std.substr: pos (which is ${pos}) > std.size(s) (which is ${i})`);
-  if (0 === n) return '';
+  if (i < pos) {
+    throw new RangeError(`std.substr: pos (which is ${pos}) > std.size(s) (which is ${i})`);
+  }
+  if (0 === n) {
+    return '';
+  }
   return s.substring(begin);
 };
 
@@ -123,6 +103,8 @@ export const substr = (s: string, pos = 0, n?: number): string => {
  */
 export const size = (s: string): number => {
   let i = 0;
-  for (const _ of s) ++i;
+  for (const _ of s) {
+    ++i;
+  }
   return i;
 };
