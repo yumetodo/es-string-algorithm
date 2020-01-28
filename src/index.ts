@@ -86,15 +86,13 @@ export const find = (target: string, key: string, pos = 0, n?: number): number =
     }
   }
 };
-export const rfind = (target: string, key: string, pos = 0, n?: number): number => {
-  const t = Array.from(target).reverse();
-  for (; ; ++pos) {
-    const i = 0;
+export const rfind = (target: string, key: string, pos = -1, n?: number): number => {
+  const t = Array.from(target);
+  if (typeof n === 'number' && 0 === n) return Math.min(pos, t.length);
+  for (let i = -1 === pos || t.length <= pos ? t.length - 1 : pos; ; --i) {
+    if (-1 === i) return -1;
     // let it1 = target[Symbol.iterator]();
 
-    if (t.length <= i) {
-      return -1;
-    }
     // for (; i < pos; ++i) {
     //   if (it1.next().done) {
     //     return -1;
@@ -117,7 +115,6 @@ export const rfind = (target: string, key: string, pos = 0, n?: number): number 
       //   return -1;
       // }
 
-      console.log(`n1:${t[i + j]}, n2:${n2.value}`);
       if (t[i + j] !== n2.value) {
         break;
       }

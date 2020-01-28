@@ -1,6 +1,6 @@
 import { find } from '../../src';
 describe('find', () => {
-  it('basicc', () => {
+  it('basic', () => {
     const s = 'hello, world. welcome to C++ world.';
     const findWord = 'world';
     expect(find(s, findWord)).toEqual(7);
