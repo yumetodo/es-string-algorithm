@@ -59,7 +59,7 @@ export const findLastNotof = (target: string, key: string, pos = -1, n?: number)
 export const find = (target: string, key: string, pos = 0, n?: number): number => {
   for (; ; ++pos) {
     let i = 0;
-    let it1 = target[Symbol.iterator]();
+    const it1 = target[Symbol.iterator]();
 
     for (; i < pos; ++i) {
       if (it1.next().done) {
@@ -67,20 +67,20 @@ export const find = (target: string, key: string, pos = 0, n?: number): number =
       }
     }
 
-    let it2 = key[Symbol.iterator]();
+    const it2 = key[Symbol.iterator]();
 
     for (let j = 0; ; ++j) {
       const n1 = it1.next();
       const n2 = it2.next();
 
-      if (n2.done || j == n) {
+      if (n2.done || j === n) {
         return i;
       }
       if (n1.done) {
         return -1;
       }
 
-      if (n1.value != n2.value) {
+      if (n1.value !== n2.value) {
         break;
       }
     }
@@ -89,32 +89,36 @@ export const find = (target: string, key: string, pos = 0, n?: number): number =
 export const rfind = (target: string, key: string, pos = 0, n?: number): number => {
   const t = Array.from(target).reverse();
   for (; ; ++pos) {
-    let i = 0;
+    const i = 0;
     // let it1 = target[Symbol.iterator]();
 
-    if (t.length <= i) return -1;
+    if (t.length <= i) {
+      return -1;
+    }
     // for (; i < pos; ++i) {
     //   if (it1.next().done) {
     //     return -1;
     //   }
     // }
 
-    let it2 = key[Symbol.iterator]();
+    const it2 = key[Symbol.iterator]();
 
     for (let j = 0; ; ++j) {
       // const n1 = it1.next();
       const n2 = it2.next();
 
-      if (n2.done || j == n) {
+      if (n2.done || j === n) {
         return i;
       }
-      if (t.length <= i + j) return -1;
+      if (t.length <= i + j) {
+        return -1;
+      }
       // if (n1.done) {
       //   return -1;
       // }
 
       console.log(`n1:${t[i + j]}, n2:${n2.value}`);
-      if (t[i + j] != n2.value) {
+      if (t[i + j] !== n2.value) {
         break;
       }
     }
