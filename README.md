@@ -6,11 +6,9 @@
 
 ## Introduction
 
-C++ STL provide `find_first_of` / `find_first_not_of` / `find_last_of` / `find_last_not_of` member function.
+C++ STL provide `find_first_of` / `find_first_not_of` / `find_last_of` / `find_last_not_of` / `find` / `rfind` member function.
 
 However, JavaScript `String` class does not provide such method. So, this package provide these functions.
-
-(When you want `find` / `rfind` that C++ STL provide, please use [`indexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf) / [`lastIndexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf))
 
 ## Reference
 
@@ -154,6 +152,74 @@ console.log(std.findLastNotof(s, str, 11));// => 6
 console.log(std.findLastNotof(s, 'Welcome to C++ world.', 1));// => 5
 console.log(std.findLastNotof('arikitari na sekai', 'a', 0));// => -1
 console.log(std.findLastNotof('🍣🍺', '🍺'));// => 0
+```
+
+### find
+
+```ts
+export declare const find: (target: string, key: string, pos = 0, n?: number) => number;
+```
+
+Determines the lowest position `xpos`, if possible, such that both of the following conditions hold:
+
+1. `xpos <= pos` and `xpos + n <= std.size(target)`
+2. [`k.includes(at(target, xpos))`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) (When `n` is `undefined` (omitted), `k` is equal to `key`. Otherwise, `k` is equal to `std.substr(key, 0, n)`)
+
+#### Parameters
+
+- `target`: search target string
+- `key`: string identifying characters to search for
+- `pos = 0`: position at which to begin searching
+- `n`(opt): length of character string identifying characters to search for
+
+#### Return value
+
+`xpos` if the function can determine such a value for `xpos`. Otherwise, returns `-1`.
+
+#### Example
+
+```js
+const std = require('es-string-algorithm');
+const s = 'Hello, world. Welcome to C++ world.';
+const str = 'world';
+console.log(std.find(s, findWord));// => 7
+console.log(std.find(s, findWord, 12));// => 29
+console.log(std.find(s, findWord, 33));// => -1
+console.log(std.find('🍣🍺📧💾', '🍺📧'));// => 1
+```
+
+### rfind
+
+```ts
+export declare const rfind: (target: string, key: string, pos = -1, n?: number) => number;
+```
+
+Determines the highest position `xpos`, if possible, such that both of the following conditions hold:
+
+1. `xpos <= pos` and `xpos + n <= std.size(target)`
+2. [`k.includes(at(target, xpos))`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) (When `n` is `undefined` (omitted), `k` is equal to `key`. Otherwise, `k` is equal to `std.substr(key, 0, n)`)
+
+#### Parameters
+
+- `target`: search target string
+- `key`: string identifying characters to search for
+- `pos = -1`: position at which to begin searching
+- `n`(opt): length of character string identifying characters to search for
+
+#### Return value
+
+`xpos` if the function can determine such a value for `xpos`. Otherwise, returns `-1`.
+
+#### Example
+
+```js
+const std = require('es-string-algorithm');
+const s = 'Hello, world. Welcome to C++ world.';
+const str = 'world';
+console.log(std.rfind(s, findWord, 29));// => 29
+console.log(std.rfind(s, findWord, 28));// => 7
+console.log(std.rfind(s, 'W', 29));// => 14
+console.log(std.rfind('🍣🍺📧💾', '🍺📧'));// => 1
 ```
 
 ### substr
