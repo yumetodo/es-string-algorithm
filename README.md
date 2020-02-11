@@ -1,8 +1,6 @@
 # es-string-algorithm
 
-[![Build Status](https://travis-ci.org/yumetodo/es-string-algorithm.svg?branch=master)](https://travis-ci.org/yumetodo/es-string-algorithm)
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/yumetodo/es-string-algorithm.svg)](https://greenkeeper.io/)
+[![CircleCI](https://circleci.com/gh/yumetodo/es-string-algorithm.svg?style=svg)](https://circleci.com/gh/yumetodo/es-string-algorithm) [![Greenkeeper badge](https://badges.greenkeeper.io/yumetodo/es-string-algorithm.svg)](https://greenkeeper.io/)
 
 [![NPM](https://nodei.co/npm/es-string-algorithm.png)](https://nodei.co/npm/es-string-algorithm/)
 
