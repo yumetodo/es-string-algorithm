@@ -91,30 +91,15 @@ export const rfind = (target: string, key: string, pos = -1, n?: number): number
   if (typeof n === 'number' && 0 === n) return Math.min(pos, t.length);
   for (let i = -1 === pos || t.length <= pos ? t.length - 1 : pos; ; --i) {
     if (-1 === i) return -1;
-    // let it1 = target[Symbol.iterator]();
-
-    // for (; i < pos; ++i) {
-    //   if (it1.next().done) {
-    //     return -1;
-    //   }
-    // }
-
     const it2 = key[Symbol.iterator]();
-
     for (let j = 0; ; ++j) {
-      // const n1 = it1.next();
       const n2 = it2.next();
-
       if (n2.done || j === n) {
         return i;
       }
       if (t.length <= i + j) {
-        return -1;
+        break;
       }
-      // if (n1.done) {
-      //   return -1;
-      // }
-
       if (t[i + j] !== n2.value) {
         break;
       }
