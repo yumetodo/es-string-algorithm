@@ -4,6 +4,8 @@
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/yumetodo/es-string-algorithm.svg)](https://greenkeeper.io/)
 
+[![NPM](https://nodei.co/npm/es-string-algorithm.png)](https://nodei.co/npm/es-string-algorithm/)
+
 ## Introduction
 
 C++ STL provide `find_first_of` / `find_first_not_of` / `find_last_of` / `find_last_not_of` / `find` / `rfind` member function.
