@@ -1,6 +1,6 @@
 {
   "name": "es-string-algorithm",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "port from C++STL std::basic_string",
   "main": "dist/index.js",
   "scripts": {
