@@ -23,7 +23,7 @@ jobs:
                     mkdir -p results/eslint
             - run:
                 name: eslint
-                command: npm run eslint -- --format=html -o ./results/eslint/eslint.html
+                command: npm run lint -- --format=html -o ./results/eslint/eslint.html
             - run:
                 name: Run tests
                 command: npm test -- --ci --runInBand --reporters=default --reporters=jest-junit
