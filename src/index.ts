@@ -56,6 +56,56 @@ export const findFirstNotOf = (target: string, key: string, pos = 0, n?: number)
 export const findLastNotof = (target: string, key: string, pos = -1, n?: number): number =>
   impl.findLast(target, pos, t => !impl.includes(key, t, n));
 
+export const find = (target: string, key: string, pos = 0, n?: number): number => {
+  for (; ; ++pos) {
+    let i = 0;
+    const it1 = target[Symbol.iterator]();
+
+    for (; i < pos; ++i) {
+      if (it1.next().done) {
+        return -1;
+      }
+    }
+
+    const it2 = key[Symbol.iterator]();
+
+    for (let j = 0; ; ++j) {
+      const n1 = it1.next();
+      const n2 = it2.next();
+
+      if (n2.done || j === n) {
+        return i;
+      }
+      if (n1.done) {
+        return -1;
+      }
+
+      if (n1.value !== n2.value) {
+        break;
+      }
+    }
+  }
+};
+export const rfind = (target: string, key: string, pos = -1, n?: number): number => {
+  const t = Array.from(target);
+  if (typeof n === 'number' && 0 === n) return Math.min(pos, t.length);
+  for (let i = -1 === pos || t.length <= pos ? t.length - 1 : pos; ; --i) {
+    if (-1 === i) return -1;
+    const it2 = key[Symbol.iterator]();
+    for (let j = 0; ; ++j) {
+      const n2 = it2.next();
+      if (n2.done || j === n) {
+        return i;
+      }
+      if (t.length <= i + j) {
+        break;
+      }
+      if (t[i + j] !== n2.value) {
+        break;
+      }
+    }
+  }
+};
 /**
  * Create part of the `s`
  * @param s string
