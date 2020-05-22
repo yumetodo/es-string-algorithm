@@ -27,11 +27,7 @@
         "format": ["camelCase"]
       },
       {
-        "selector": "class",
-        "format": ["camelCase"]
-      },
-      {
-        "selector": "typeAlias",
+        "selector": "typeLike",
         "format": ["PascalCase"]
       },
       {
@@ -40,6 +36,12 @@
       },
       {
         "selector": "variable",
+        "format": ["camelCase"],
+        "leadingUnderscore": "allow",
+        "trailingUnderscore": "allow"
+      },
+      {
+        "selector": "parameter",
         "format": ["camelCase"],
         "leadingUnderscore": "allow",
         "trailingUnderscore": "allow"
