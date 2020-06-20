@@ -1,6 +1,6 @@
 # es-string-algorithm
 
-[![CircleCI](https://circleci.com/gh/yumetodo/es-string-algorithm.svg?style=svg)](https://circleci.com/gh/yumetodo/es-string-algorithm) [![Greenkeeper badge](https://badges.greenkeeper.io/yumetodo/es-string-algorithm.svg)](https://greenkeeper.io/)
+[![CircleCI](https://circleci.com/gh/yumetodo/es-string-algorithm.svg?style=svg)](https://circleci.com/gh/yumetodo/es-string-algorithm) [![Known Vulnerabilities](https://snyk.io/test/github/yumetodo/es-string-algorithm/badge.svg?targetFile=package.json)](https://snyk.io/test/github/yumetodo/es-string-algorithm?targetFile=package.json)
 
 [![NPM](https://nodei.co/npm/es-string-algorithm.png)](https://nodei.co/npm/es-string-algorithm/)
 
